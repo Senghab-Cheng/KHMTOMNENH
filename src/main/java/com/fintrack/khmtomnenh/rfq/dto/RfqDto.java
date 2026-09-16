@@ -1,0 +1,2 @@
+package com.fintrack.khmtomnenh.rfq.dto; import jakarta.validation.Valid; import jakarta.validation.constraints.*; import java.math.*; import java.time.*; import java.util.*;
+public record RfqDto(@NotBlank String title,String description,LocalDateTime expiresAt,@NotEmpty List<@Valid Item> items){public record Item(@NotNull Long productId,@NotNull @Min(1) Integer quantity,@DecimalMin("0.00") BigDecimal targetPrice){}}

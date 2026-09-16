@@ -1,0 +1,1 @@
+package com.fintrack.khmtomnenh.quotation.dto; import jakarta.validation.*; import jakarta.validation.constraints.*; import java.math.*; import java.util.*; public record QuotationDto(@NotNull Long rfqId,String notes,@NotEmpty List<@Valid Item> items){public record Item(@NotNull Long productId,@NotNull @Min(1) Integer quantity,@NotNull @DecimalMin("0.00") BigDecimal unitPrice){}}

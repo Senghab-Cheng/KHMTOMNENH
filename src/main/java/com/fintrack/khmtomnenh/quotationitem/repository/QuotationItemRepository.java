@@ -1,0 +1,1 @@
+package com.fintrack.khmtomnenh.quotationitem.repository; import com.fintrack.khmtomnenh.quotationitem.entity.QuotationItem; import org.springframework.data.jpa.repository.JpaRepository; public interface QuotationItemRepository extends JpaRepository<QuotationItem,Long>{}

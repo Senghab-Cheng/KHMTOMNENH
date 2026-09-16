@@ -1,0 +1,1 @@
+package com.fintrack.khmtomnenh.rfqitem.repository; import com.fintrack.khmtomnenh.rfqitem.entity.RfqItem; import org.springframework.data.jpa.repository.JpaRepository; public interface RfqItemRepository extends JpaRepository<RfqItem,Long>{}

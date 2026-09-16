@@ -1,0 +1,1 @@
+package com.fintrack.khmtomnenh.rfq.repository; import com.fintrack.khmtomnenh.rfq.entity.Rfq; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; public interface RfqRepository extends JpaRepository<Rfq,Long>{List<Rfq> findByBuyerIdOrderByCreatedAtDesc(Long id);List<Rfq> findByStatusOrderByCreatedAtDesc(String status);}

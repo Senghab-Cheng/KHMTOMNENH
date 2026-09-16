@@ -20,13 +20,21 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse register(RegisterRequest request) {
-        if (authRepository.existsByEmail(request.email())) {
+        String email = request.email().trim().toLowerCase();
+        String fullName = request.fullName().trim();
+        int nameSeparator = fullName.indexOf(' ');
+        String firstName = nameSeparator > 0 ? fullName.substring(0, nameSeparator) : fullName;
+        String lastName = nameSeparator > 0 ? fullName.substring(nameSeparator + 1).trim() : "";
+        if (authRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("Email is already registered");
         }
 
         Auth user = Auth.builder()
-                .fullName(request.fullName())
-                .email(request.email().toLowerCase())
+                .fullName(fullName)
+                .firstName(firstName)
+                .lastName(lastName)
+                .email(email)
+                .mobileNumber(request.mobileNumber().trim())
                 .password(passwordEncoder.encode(request.password()))
                 .role(request.role())
                 .enabled(true)
@@ -47,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse login(LoginRequest request) {
-        Auth user = authRepository.findByEmail(request.email().toLowerCase())
+        Auth user = authRepository.findByEmail(request.email().trim().toLowerCase())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {

@@ -1,0 +1,1 @@
+package com.fintrack.khmtomnenh.productimage.repository; import com.fintrack.khmtomnenh.productimage.entity.ProductImage; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; public interface ProductImageRepository extends JpaRepository<ProductImage,Long>{List<ProductImage> findByProductId(Long productId);}

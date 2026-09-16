@@ -1,0 +1,16 @@
+alter table categories add column if not exists active boolean not null default true;
+alter table categories add column if not exists created_at timestamp not null default current_timestamp;
+alter table categories add column if not exists updated_at timestamp;
+alter table product_images add column if not exists image_url varchar(1000);
+alter table product_images add column if not exists created_at timestamp not null default current_timestamp;
+alter table rfqs add column if not exists status varchar(30) not null default 'OPEN';
+alter table rfqs add column if not exists expires_at timestamp;
+alter table rfqs add column if not exists created_at timestamp not null default current_timestamp;
+alter table quotations add column if not exists total_amount numeric(19,2) not null default 0;
+alter table quotations add column if not exists status varchar(30) not null default 'SUBMITTED';
+alter table quotations add column if not exists notes text;
+alter table quotations add column if not exists created_at timestamp not null default current_timestamp;
+alter table orders add column if not exists status varchar(30) not null default 'PENDING';
+alter table orders add column if not exists total_amount numeric(19,2) not null default 0;
+alter table orders add column if not exists created_at timestamp not null default current_timestamp;
+alter table orders add column if not exists updated_at timestamp;

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .form-input {
+    @apply mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-neutral-700 dark:bg-neutral-800 dark:text-slate-50;
+  }
+
+  .field-label {
+    @apply block text-sm font-medium text-slate-900 dark:text-slate-50;
+  }
+}
