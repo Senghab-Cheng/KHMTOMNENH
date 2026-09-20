@@ -13,6 +13,16 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 export type ApiRecord = Record<string, unknown>;
 
+async function fetchApi(path: string, options: RequestInit = {}) {
+  try {
+    return await fetch(`${apiUrl}${path}`, options);
+  } catch {
+    throw new Error(
+      "Unable to reach KhmerTrade API. Start the backend with `npm run backend` and try again.",
+    );
+  }
+}
+
 export async function apiRequest<T>(
   path: string,
   options: RequestInit = {},
@@ -25,7 +35,7 @@ export async function apiRequest<T>(
   headers.set("Content-Type", "application/json");
   if (session?.token) headers.set("Authorization", `${session.tokenType} ${session.token}`);
 
-  const response = await fetch(`${apiUrl}${path}`, { ...options, headers });
+  const response = await fetchApi(path, { ...options, headers });
   const body = await response.json().catch(() => null);
   if (!response.ok) {
     const message =
@@ -52,7 +62,7 @@ export async function authenticate(
   endpoint: "login" | "register",
   payload: Record<string, unknown>,
 ): Promise<AuthResponse> {
-  const response = await fetch(`${apiUrl}/api/auth/${endpoint}`, {
+  const response = await fetchApi(`/api/auth/${endpoint}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
