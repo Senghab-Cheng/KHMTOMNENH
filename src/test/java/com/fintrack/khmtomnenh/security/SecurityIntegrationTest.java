@@ -111,6 +111,7 @@ class SecurityIntegrationTest {
         String suffix = UUID.randomUUID().toString();
         String supplierToken = register("supplier-" + suffix + "@example.com", "SUPPLIER");
         String buyerToken = register("buyer-" + suffix + "@example.com", "BUYER");
+        String unrelatedToken = register("unrelated-" + suffix + "@example.com", "BUYER");
         Category category = categoryRepository.save(Category.builder()
                 .name("Workflow-" + suffix)
                 .description("Workflow test category")
@@ -197,12 +198,20 @@ class SecurityIntegrationTest {
                 .andReturn().getResponse().getContentAsString();
         long quotationId = idFrom(quotation);
 
+        mockMvc.perform(get("/api/quotations/" + quotationId)
+                        .header("Authorization", "Bearer " + unrelatedToken))
+                .andExpect(status().isForbidden());
+
         String order = mockMvc.perform(post("/api/orders/accept/" + quotationId)
                         .header("Authorization", "Bearer " + buyerToken))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.totalAmount").value(45.0))
                 .andReturn().getResponse().getContentAsString();
         long orderId = idFrom(order);
+
+        mockMvc.perform(get("/api/orders/" + orderId)
+                        .header("Authorization", "Bearer " + unrelatedToken))
+                .andExpect(status().isForbidden());
 
         mockMvc.perform(patch("/api/orders/" + orderId + "/status")
                         .header("Authorization", "Bearer " + supplierToken)
