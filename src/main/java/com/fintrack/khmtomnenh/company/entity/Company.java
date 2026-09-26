@@ -1,6 +1,7 @@
 package com.fintrack.khmtomnenh.company.entity;
 
 import com.fintrack.khmtomnenh.auth.entity.Auth;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.*;
@@ -13,6 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Company {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Auth owner;
@@ -22,10 +24,14 @@ public class Company {
     private String email;
     private String phone;
     private String address;
+    @Column(length = 500)
+    private String website;
     @Column(nullable = false)
     private String country;
     @Column(nullable = false)
     private String city;
+    @Column(name = "business_type")
+    private String businessType;
     @Builder.Default
     @Column(name = "verification_status", nullable = false)
     private String verificationStatus = "PENDING";

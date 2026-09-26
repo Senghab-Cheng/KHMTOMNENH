@@ -1,0 +1,5 @@
+ALTER TABLE quotations
+ADD COLUMN IF NOT EXISTS shipping_cost NUMERIC(19,2) NOT NULL DEFAULT 0;
+
+ALTER TABLE quotations
+ADD COLUMN IF NOT EXISTS delivery_date DATE;

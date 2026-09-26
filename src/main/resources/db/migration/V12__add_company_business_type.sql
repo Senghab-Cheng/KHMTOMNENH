@@ -1,0 +1,2 @@
+ALTER TABLE companies
+ADD COLUMN IF NOT EXISTS business_type VARCHAR(255);
