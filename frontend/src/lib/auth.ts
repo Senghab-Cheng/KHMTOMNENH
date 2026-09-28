@@ -9,7 +9,11 @@ export type AuthResponse = {
   role: UserRole;
 };
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+const apiUrl =
+  process.env.NEXT_PUBLIC_API_URL ??
+  (typeof window !== "undefined"
+    ? `http://${window.location.hostname}:8080`
+    : "http://localhost:8080");
 
 export type ApiRecord = Record<string, unknown>;
 
@@ -18,7 +22,7 @@ async function fetchApi(path: string, options: RequestInit = {}) {
     return await fetch(`${apiUrl}${path}`, options);
   } catch {
     throw new Error(
-      "Unable to reach KhmerTrade API. Start the backend with `npm run backend` and try again.",
+      "Unable to reach FoodFarm Hub API. Start the backend with `npm run backend` and try again.",
     );
   }
 }

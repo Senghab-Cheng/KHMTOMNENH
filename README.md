@@ -22,6 +22,14 @@ export JWT_SECRET="$(openssl rand -base64 48)"
 npm run backend
 ```
 
+When opening the frontend from another device on the same network, set the
+frontend API URL to the backend machine's LAN address before starting Next.js:
+
+```bash
+export NEXT_PUBLIC_API_URL=http://192.168.0.102:8080
+npm run dev
+```
+
 The API listens on http://localhost:8080. A PostgreSQL database named `khmertrade` must be running locally for the
 backend to start successfully. The application uses the `public` schema;
 authentication records are stored in `public.users`, while product records

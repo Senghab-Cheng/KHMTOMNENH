@@ -1,0 +1,5 @@
+import Link from "next/link";
+
+export default function SiteFooter() {
+  return <footer className="site-footer"><div className="section-shell footer-main"><div className="footer-brand"><Link href="/" className="footer-logo"><span className="brand-mark">◒</span>FOODFARM <i>HUB</i></Link><p>Cambodia&apos;s B2B Food &amp; Agriculture Marketplace.</p><div className="socials"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a></div></div>{[["Products", "/products"], ["Suppliers", "/suppliers"], ["Categories", "/categories"], ["About Us", "/about"], ["Contact", "/about"]].map(([label, href]) => <div className="footer-column" key={label}><h3>{label}</h3><Link href={href}>Explore {label}</Link><Link href={href}>Request Quote</Link><Link href={href}>Learn More</Link></div>)}<div className="language">🌐 EN <span>▾</span></div></div><div className="footer-bottom section-shell"><span>© 2026 FoodFarm Hub. All rights reserved.</span><strong>Source Cambodia. Trade Globally.</strong></div></footer>;
+}

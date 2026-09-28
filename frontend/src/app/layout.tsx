@@ -1,3 +1,7 @@
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
+import "@/styles/globals.css";
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><SiteHeader />{children}<SiteFooter /></body>
     </html>
   );
 }
